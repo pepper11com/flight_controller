@@ -37,9 +37,13 @@ timerHardware_t timerHardware[] = {
     DEF_TIM(TIM4, CH1, PB6, TIM_USE_MOTOR,       1, 0), // S1 / Motor 1 (Left)
     DEF_TIM(TIM4, CH2, PB7, TIM_USE_MOTOR,       1, 0), // S2 / Motor 2 (Right)
     DEF_TIM(TIM8, CH3N,PB1, TIM_USE_MOTOR,       1, 0), // S3 / Motor 3 (Moved to TIM8 to avoid conflict with S4)
-    DEF_TIM(TIM3, CH3, PB0, TIM_USE_SERVO,       1, 0), // S4 / Servo 4
-    DEF_TIM(TIM12, CH1, PB14, TIM_USE_SERVO,       1, 0), // SERVO5 (CC on PB14)
-    DEF_TIM(TIM1,  CH1, PA8,  TIM_USE_SERVO,       0, 0), // SERVO6 (LED on PA8)
+
+    // Placeholder Servo to maintain indexing (S5 -> Servo 3, S6 -> Servo 4)
+    DEF_TIM(TIM2, CH1, PA15, TIM_USE_SERVO,      0, 0), // Fake Servo 1 (Placeholder)
+
+    DEF_TIM(TIM3, CH3, PB0, TIM_USE_SERVO,       1, 0), // S4 / Servo 2
+    DEF_TIM(TIM12, CH1, PB14, TIM_USE_SERVO,       1, 0), // S5 / Servo 3 (CC on PB14)
+    DEF_TIM(TIM1,  CH1, PA8,  TIM_USE_SERVO,       0, 0), // S6 / Servo 4 (LED on PA8)
 
     // Optional softserial on PA2 (if not using it)
     // DEF_TIM(TIM5, CH3, PA2, TIM_USE_ANY,           0, 0), // TX2 softserial1_Tx
