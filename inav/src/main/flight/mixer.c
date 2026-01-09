@@ -137,6 +137,13 @@ static void computeMotorCount(void)
         }
         motorCount++;
     }
+
+    // Force motorCount to 3 to ensure Motor 3 is initialized even if the Mixer has no rule for it.
+    // This allows MSP to control Motor 3 while the Flight Controller ignores it (Differential Thrust preserved).
+    if (motorCount < 3) {
+        motorCount = 3;
+    }
+
     firstRun = false;
 }
 
@@ -720,6 +727,13 @@ void FAST_CODE mixTable(void)
         if (currentMixer[i].throttle <= 0.0f) {
             motor[i] = motorZeroCommand;
         }
+
+        // Force Motor 3 (index 2) to be 0 for standard flight logic.
+        // It will only be active if MSP Override is used (drivers/logic handled in writeMotors).
+        if (i == 2) {
+             motor[i] = motorZeroCommand;
+        }
+
         //spin stopped motors only in mixer transition mode
         if (isMixerTransitionMixing && currentMixer[i].throttle <= -1.05f && currentMixer[i].throttle >= -2.0f && (!feature(FEATURE_REVERSIBLE_MOTORS))) {
             motor[i] = -currentMixer[i].throttle * 1000;
